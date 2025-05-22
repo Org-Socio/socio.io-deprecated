@@ -48,6 +48,19 @@ const setupGoogleCredentials = () => {
     return true;
   } 
   
+  // Handle Google Cloud credentials from Base64 environment variable
+  if (process.env.GOOGLE_CLOUD_CREDENTIALS_BASE64) {
+    try {
+      const credentialsJson = Buffer.from(process.env.GOOGLE_CLOUD_CREDENTIALS_BASE64, 'base64').toString();
+      const tempCredentialsPath = path.join(__dirname, 'google_credentials_temp.json');
+      fs.writeFileSync(tempCredentialsPath, credentialsJson);
+      process.env.GOOGLE_APPLICATION_CREDENTIALS = tempCredentialsPath;
+      console.log('Google Cloud credentials loaded from environment variable');
+    } catch (error) {
+      console.error('Error setting up Google Cloud credentials:', error);
+    }
+  }
+  
   // Check if credentials are provided as environment variables (for deployment)
   if (process.env.GOOGLE_CLOUD_CREDENTIALS_JSON) {
     logger.info('Using Google Cloud credentials from environment variable');

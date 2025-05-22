@@ -338,9 +338,17 @@ function processImageElement(element) {
                         }
                     } else {
                         debug("Image passed analysis, not filtering");
+                        
+                        // Remove any temporary blur that was applied
+                        if (tempBlurApplied) {
+                            const updatedElement = document.querySelector('.' + uniqueId);
+                            if (updatedElement) {
+                                updatedElement.style.filter = "none";
+                                updatedElement.style.border = "none";
+                            }
+                        }
                     }
                 })
-            })
             .catch(error => {
                 debug("Error calling backend API:", error);
                 

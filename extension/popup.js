@@ -481,7 +481,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize components
     initProtectionToggle();
     loadStats();
-    setupTabNavigation();
+    setupTabSwitching();
     setupButtonListeners();
     checkBackendStatus();
 });

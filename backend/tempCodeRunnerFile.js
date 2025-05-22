@@ -1,0 +1,1 @@
+process.env.GOOGLE_APPLICATION_CREDENTIALS = './my-project-92814-457204-55b9d43a15b3.json';
